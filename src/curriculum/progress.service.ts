@@ -50,7 +50,7 @@ export class ProgressService {
 
   constructor(
     @InjectModel(UserCurriculum.name)
-    private userCurriculumModel: Model<UserCurriculum>,
+    public userCurriculumModel: Model<UserCurriculum>,
     @InjectModel(QuizAttempt.name)
     private quizAttemptModel: Model<QuizAttemptDocument>,
   ) {}

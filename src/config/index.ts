@@ -44,7 +44,7 @@ export function configuration() {
 //     ? [websiteUrl, 'https://admin.socket.io']
 //     : '*';
 
- const corsOrigin = '*';
+const corsOrigin = ['*', 'https://persona-learna-backend.onrender.com'];
 
   const config: Config = {
     isProduction,

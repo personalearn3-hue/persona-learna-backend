@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { Config } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,6 +24,10 @@ async function bootstrap() {
       // forbidNonWhitelisted: true,
     }),
   );
+
+  const configService = app.get(ConfigService<Config, true>);
+  const cors = configService.get('cors', { infer: true });
+   app.enableCors({ origin: cors.origin });
 
   await app.listen(process.env.PORT ?? 3000);
 }

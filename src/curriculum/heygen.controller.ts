@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, Param, Post, Query, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { HeyGenService } from "./heygen.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 
@@ -7,9 +7,9 @@ export class HeygenController {
     constructor(private readonly heygenService: HeyGenService) { }
 
     @Get("/avatars")
-    async getAvatars() {
-        return await this.heygenService.getAvailableAvatars()
-    }
+  async getAvatars(@Query('ownership') ownership?: 'public' | 'private') {
+  return await this.heygenService.getAvailableAvatars(ownership);
+}
 
     @Post('/create')
     @UseInterceptors(FileInterceptor('image'))
@@ -48,5 +48,14 @@ export class HeygenController {
             file.mimetype,
             name,
         );
+    }
+
+    @Post("video/:userCurriculumId")
+    async createVideo(
+        @Param('userCurriculumId') userCurriculumId: string,
+        @Body('avatar_id') avatar_id: string,
+        @Body('voice_id') voice_id: string,
+    ) {
+        return await this.heygenService.generateVideosForCurriculum(userCurriculumId, avatar_id, voice_id)
     }
 }
