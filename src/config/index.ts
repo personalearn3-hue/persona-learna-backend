@@ -31,6 +31,14 @@ export interface Config {
     apiKey: string;
     testMode: boolean;
   };
+  mail: {
+    host: string;
+    port: number;
+    user: string;
+    pass: string;
+    from: string;
+  };
+  frontendUrl: string;
 }
 
 export function configuration() {
@@ -69,7 +77,15 @@ const corsOrigin = ['*', 'https://persona-learna-backend.onrender.com', 'http://
     heygen: {
       apiKey: env.HEYGEN_API_KEY,
       testMode: env.HEYGEN_TEST_MODE === 'true',
-    }
+    },
+    mail: {
+      host: env.SMTP_HOST,
+      port: Number(env.SMTP_PORT) || 587,
+      user: env.SMTP_USER,
+      pass: env.SMTP_PASS,
+      from: env.MAIL_FROM || 'PersonaLearna <no-reply@persona-learna.app>',
+    },
+    frontendUrl: env.FRONTEND_URL || 'http://localhost:5173',
   };
 
 

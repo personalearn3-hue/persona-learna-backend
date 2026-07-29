@@ -63,4 +63,28 @@ export class EnvironmentVariables {
   @IsString()
   @IsOptional()
   HEYGEN_TEST_MODE: string
+
+  @IsString()
+  @IsOptional()
+  SMTP_HOST: string
+
+  @IsString()
+  @IsOptional()
+  SMTP_PORT: string
+
+  @IsString()
+  @IsOptional()
+  SMTP_USER: string
+
+  @IsString()
+  @IsOptional()
+  SMTP_PASS: string
+
+  @IsString()
+  @IsOptional()
+  MAIL_FROM: string
+
+  @IsString()
+  @IsOptional()
+  FRONTEND_URL: string
 }
